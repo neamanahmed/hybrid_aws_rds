@@ -1,0 +1,5 @@
+project_dir: ./
+#aws_access_key_id:  AKIA4BFAMLEXUTGLEBXQ
+#aws_secret_access_key: 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
+aws_region: me-central-1
+comp_acc_vpc: /home/ansible/.my.cnf

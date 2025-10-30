@@ -1,0 +1,42 @@
+---
+- name: Deplpying RDS Through Terraform
+  hosts: localhost
+  become: false
+  vars_files:
+    - var_dwc_rds.yml
+  tasks:
+    - name: Basic deploy  RDS MySQL 8.0.4
+      community.general.terraform:
+        project_path: '{{ project_dir }}'
+        force_init: true
+        provider_upgrade: true
+        state: present
+        no_color: false
+      environment:
+        AWS_DEFAULT_REGION: "{{ aws_region }}"
+      register: eurodb
+
+    - debug:
+        msg:
+          - 'RdsEndpoint:  {{ eurodb.outputs.rds_endpoint.value }}'
+
+
+    - name: Write RDS MySQL connection configuration info to remote host
+      ansible.builtin.template  :
+        src:  rds_mysql_conf.j2
+        dest: "{{ comp_acc_vpc }}"
+        force: true
+      delegate_to: "{{ item }}"
+      loop:
+        - ohama
+        - aws23
+
+    - name: Show RDS MySQL connection configuration info
+      ansible.builtin.debug:
+        msg: |
+          RDS MySQL connection configuration written to {{ comp_acc_vpc }}:
+          {{ lookup('ansible.builtin.file', comp_acc_vpc) }}
+      delegate_to: "{{ item }}"
+      loop:
+        - ohama
+        - aws23
