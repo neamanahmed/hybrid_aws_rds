@@ -16,7 +16,7 @@ resource "aws_db_instance" "default" {
 
   skip_final_snapshot    = true
   publicly_accessible    = true # So you can connect for testing
-  vpc_security_group_ids = ["sg-0e4b168e4c00fdbc8"]
+  vpc_security_group_ids = ["sg-xxxxxxxxxxxxxxxxx"]
   db_subnet_group_name   = "ae_rds_sbnet_grp"
   tags = {
     Name        = "dxbeuro-db"
