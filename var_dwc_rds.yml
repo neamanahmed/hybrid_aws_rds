@@ -1,0 +1,5 @@
+project_dir: ./
+aws_access_key_id:  xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+aws_secret_access_key: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+aws_region: me-central-1
+comp_acc_vpc: /home/ansible/.my.cnf
